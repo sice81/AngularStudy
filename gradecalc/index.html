@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+	<body ng-app="gradeCalcApp">
+		<script src="angular.js"></script>
+		<script src="scripts/app.js"></script>
+		
+		<div ng-controller="gradeCalcController">
+			<ul>
+				<li ng-repeat="myScore in myScoreList">
+					과목 : 
+					<select ng-model="myScore.selectedSubject" 
+						ng-options="subject.name for subject in subjectList" ng-required="true">
+						<option value="">선택해주세요.</option>
+					</select>
+					<!--{{myScore.selectedSubject}}-->
+					학점: {{myScore.selectedSubject.weight}}
+					점수 :
+					<select ng-model="myScore.selectedGrade" 
+						ng-options="grade.grade for grade in gradeList">
+					</select>
+					<!--{{myScore.selectedGrade}}-->
+					<button ng-click="deleteSub($index)">삭제</button>
+				</li>
+			</ul>
+			
+			<br>
+			<button ng-click="add()">추가</button>
+			<button ng-click="calc()">계산</button>
+			
+			<p ng-show="isCalc"> 평점은 {{result}} 입니다. </p>
+		</div>
+	</body>
+</html>
